@@ -1,5 +1,9 @@
 # D O C K E R - BEGINNER
 
+> ` docker run --help`
+> ` docker --help`
+> `docker run -p 8081:80 -v ${PWD}:/usr/share/nginx/html nginx`
+
 * [git - repo ](https://github.com/bstashchuk/docker)
 * [ALPINE](https://alpinelinux.org/)
 
@@ -28,6 +32,7 @@ Happy learning!
 
 
 ### Some commands
+> NOTE: it's not possible to create container with the **same name** as was assigned (manually or randomly) to any of the running/ stopped containers
 
 command  | Explanation 
 ------------- | -------------
@@ -74,6 +79,29 @@ command  | Explanation
 `> docker run -p 8080:80 -d nginx` | run docker in background
 `> docker logs [idNginx Running]` | 
 
+#### Creating multiple ubuntu container from the same image
+
+command  | Explanation 
+------------- | -------------
+`> docker run -it ubuntu`| EXCECUTE ubuntu inside container 
+
+#### Clean and stop container
+
+command  | Explanation 
+------------- | -------------
+`> docker start`| command container will be started exactly with the same configuration as it was running with before exit
+`> docker ps -a`| list all the containers that exited like history
+`> docker rm [dockerName]`| see how to know the name in the video 20
+
+## Running Python Application in Docker
+command  | Explanation 
+------------- | -------------
+`> docker pull python`| download image 
+`> docker run python`| <-
+`> docker run -it python`| run and still alive
+`C:\python`| I had some problems with path in linux the absolute path is ${PWD} but in windos is %cd%
+`> C:\python>docker run -it -v %cd%:/app python python3 /app/hello.py` | run a file .py 
+`> C:\python>docker run -it -v %cd%:/app  -w /app python python3 hello.py` | run a file .py 
 
 ### Some commands linux
 
