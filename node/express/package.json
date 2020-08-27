@@ -1,0 +1,19 @@
+{
+  "name": "docket-test",
+  "version": "0.0.1",
+  "description": "hello world insider docker ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "leo",
+    "medina"
+  ],
+  "author": "leo medina",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "process": "^0.11.10"
+  }
+}

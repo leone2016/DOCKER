@@ -92,17 +92,35 @@ command  | Explanation
 `> docker start`| command container will be started exactly with the same configuration as it was running with before exit
 `> docker ps -a`| list all the containers that exited like history
 `> docker rm [dockerName]`| see how to know the name in the video 20
+`> docker container prune`| after see all containers docker ps -a 
 
-## Running Python Application in Docker
+### Running Python Application in Docker
+
 command  | Explanation 
 ------------- | -------------
 `> docker pull python`| download image 
-`> docker run python`| <-
+`> docker run python`| <- run image and exit inmediatly
 `> docker run -it python`| run and still alive
 `C:\python`| I had some problems with path in linux the absolute path is ${PWD} but in windos is %cd%
 `> C:\python>docker run -it -v %cd%:/app python python3 /app/hello.py` | run a file .py 
 `> C:\python>docker run -it -v %cd%:/app  -w /app python python3 hello.py` | run a file .py 
 
+### Running Node.js Application in Docker [S7]
+command  | Explanation 
+------------- | -------------
+`> docker pull node`| download image 
+`> docker run node`| <- run image and exit inmediatly
+`> docker run -it node`| run and still alive
+`> .help`| inside node contaider, you can see .exit
+`> docker run -v %cd%:/app -w /app node node hello.js`| for linux terminal use $PWD 
+`> docker run -v %cd%:/app -w /app -it node npm init`|  1st init a npm proyect, here docker will be create a file inside docker and local computer (inside express folder)
+`> docker run -v %cd%:/app -w /app -it node npm install express`|  2nd  install express, inside local folder you could see a node_modules folder (inside express folder)
+`> docker run -v %cd%:/app -w /app -it -p node node index `|  3th  run index.js server, here the servers is UP, dash p (-p [internalPort]:[externalPort]) is for use the same external port (inside express folder)
+`> docker ps`|  3th  verify if node is up
+`> ... `|  3th  verify in any broser localhost:3000 and see if the server is running
+`> docker kill [nameContainer]`|  kill server 
+`> docker run -v %cd%:/app -w /app -it node npm install process`|  install express (inside express folder)
+'docker run -v %cd%:/app -w /app -it node node index.js `| CHALLENGE
 ### Some commands linux
 
 command  | Explanation 
