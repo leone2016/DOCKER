@@ -99,30 +99,72 @@ command  | Explanation
 command  | Explanation 
 ------------- | -------------
 `> docker pull python`| download image 
-`> docker run python`| <- run image and exit inmediatly
+`> docker run python`| <- run image and exit immediately
 `> docker run -it python`| run and still alive
-`C:\python`| I had some problems with path in linux the absolute path is ${PWD} but in windos is %cd%
+`C:\python`| I had some problems with path in linux the absolute path is ${PWD} but in windows is %cd%
 `> C:\python>docker run -it -v %cd%:/app python python3 /app/hello.py` | run a file .py 
 `> C:\python>docker run -it -v %cd%:/app  -w /app python python3 hello.py` | run a file .py 
 
 ### Running Node.js Application in Docker [S7]
+
 command  | Explanation 
 ------------- | -------------
 `> docker pull node`| download image 
-`> docker run node`| <- run image and exit inmediatly
+`> docker run node`| <- run image and exit immediately
 `> docker run -it node`| run and still alive
 `> .help`| inside node contaider, you can see .exit
 `> docker run -v %cd%:/app -w /app node node hello.js`| for linux terminal use $PWD 
-`> docker run -v %cd%:/app -w /app -it node npm init`|  1st init a npm proyect, here docker will be create a file inside docker and local computer (inside express folder)
+`> docker run -v %cd%:/app -w /app -it node npm init`|  1st init a npm project, here docker will be create a file inside docker and local computer (inside express folder)
 `> docker run -v %cd%:/app -w /app -it node npm install express`|  2nd  install express, inside local folder you could see a node_modules folder (inside express folder)
 `> docker run -v %cd%:/app -w /app -it -p node node index `|  3th  run index.js server, here the servers is UP, dash p (-p [internalPort]:[externalPort]) is for use the same external port (inside express folder)
 `> docker ps`|  3th  verify if node is up
 `> ... `|  3th  verify in any broser localhost:3000 and see if the server is running
 `> docker kill [nameContainer]`|  kill server 
 `> docker run -v %cd%:/app -w /app -it node npm install process`|  install express (inside express folder)
-'docker run -v %cd%:/app -w /app -it node node index.js `| CHALLENGE
-### Some commands linux
+`docker run -v %cd%:/app -w /app -it node node index.js `| CHALLENGE
+`docker container prune`| stop all containers
+
+### Running MONGO Application in Docker [S8]
+
+> here I have a important note, we can run a additional process inside of the run container
 
 command  | Explanation 
 ------------- | -------------
-`:# hostname -i` | see d=the ip address assigned 
+`> docker pull mongo`| download image 
+`> docker help`| see more options that we can run, In this case I'll use exec (<-)
+`> docker pull mongo`| download image 
+`> docker run mongo`| this execute a container with this id **72f80e5cb0b2** 
+`> docker exec [idDocker] or [nameDocker]`| download image, to see idDocker or nameDocker, `docker ps`
+`> docker exec -it 72 bash`| same above, in the terminal I could see that I'm inside docker container that I enter 
+`root@72f80e5cb0b2:/# ps -e`|  list all the processor that are running inside the container, the most important here is to look that we have able to run multiple process inside container
+`> docker exec -it 72 sh`| open new shell, after running this command return to bash shell (above), and execute again and look a new process is running 
+`> docker inspect [idDocker] or [nameDocker]`| download image 
+`root@72f80e5cb0b2:/# ls /use/bin`| here we could find a mongo file that there are executable
+`> docker exec -it 72 mongo` | this tell us that actually connected to mongo DB  process from mongo shell and here we are able to perform some actions, for eg. we are able to find out a version of this mongo database  
+**INSIDE MONGO SHELL**| ** -- **
+`> db.version()` | ***inside mongo shell*
+`> show dbs` | **inside mongo shell**
+`> use animalsDB` | create a new new database
+`> db.animal.insert({"animal": "cat"})` | insert a new collection
+`> db.animal.insert({"animal": "dog"})` | insert a new collection
+`> db.animal.find()` | list all animals
+`> exit` | ...
+`> ` | **IMPORTANT** keep in mind, if we repeat all this steps we'll created a new container and inside there are't the database that I created (animalsDB)
+`> docker ps -a` | se the last containers 
+`> docker start 72` | this start mongo shell
+`> docker exec -it 72 mongo` | this execute a container with this id **72f80e5cb0b2**, and here it's possible to see the previous database called animalsDB
+
+#### Running MONGO container with persistence database
+
+command  | Explanation 
+------------- | -------------
+`> docker run -d -v %cd%/db:/data/db mongo`| -d: Running docker in background, inside folder mongo
+`> docker ps -a`| see the container is running, and catch the container id (13f244503833 )
+`> docker exec -it 13 bash`| ERROR ..... review class 36 again
+
+# Some linux commands 
+
+command  | Explanation 
+------------- | -------------
+`:# hostname -i` | see d=the ip address assigned, the important here is "Path": and "Args": both are in the beginning shell
+`:# ls /user/bin` | here there are a lot of EXECUTABLE file 
