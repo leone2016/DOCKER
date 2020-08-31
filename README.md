@@ -162,9 +162,40 @@ command  | Explanation
 `> docker ps -a`| see the container is running, and catch the container id (13f244503833 )
 `> docker exec -it 13 bash`| ERROR ..... review class 36 again
 
+### Running WORDPRESS Application in Docker [S9]
+
+command  | Explanation 
+------------- | -------------
+`> docker pull wordpress`| download image 
+`> docker run wordpress`| run image 
+`> docker run wordpress`| run image 
+`> docker run -d -p 8080:80 wordpress`| run image in background and with diferent port on localhost
+
+#### Running COMUNICATION between containers [S9]
+
+command  | Explanation 
+------------- | -------------
+`> docker run -it busybox` | enable two containers
+`# hostname -i` | see the ip address 
+`# env` | download image 
+`> docker exec [idContainer] env` | list all environment variables created  
+`> docker run mysql` | download and try to run
+`> docker run -e [NAME_VARIABLE]=something [nameImage]` |set a environment variable ex: `> docker run -e MYSQL_ROOT_PASSWORD=my-password  mysql`
+`> docker exec [idContainer] env` | list all environment variables created 
+`> docker pull phpmyadmin/phpmyadmin` | list all environment variables created 
+
+
+#### Running COMUNICATION between phpMyAdmin and Mysql [S9]
+`> docker run -e [NAME_VARIABLE]=something [nameImage]` |set a environment variable ex: `> docker run -e MYSQL_ROOT_PASSWORD=my-password  mysql`
+`> docker ps` | se de container id assigned 02b9a9d98484
+`> docker exec -it 02 sh` | se de container id assigned 02b9a9d98484 mysql
+`# hostname -i` | notice the ip address 172.17.0.2   mysql
+`> docker run -p 8080:80 -e PMA_HOST=172.17.0.2 phpmyadmin/phpmyadmin` | connect phpMyAdmin with env with the ip address assigned
+
+
 # Some linux commands 
 
 command  | Explanation 
 ------------- | -------------
-`:# hostname -i` | see d=the ip address assigned, the important here is "Path": and "Args": both are in the beginning shell
-`:# ls /user/bin` | here there are a lot of EXECUTABLE file 
+`:# hostname -i` | see the ip address assigned, the important here is "Path": and "Args": both are in the beginning shell
+`:# env` | list all environment variables created
