@@ -31,36 +31,6 @@ $ docker rm -vf $(docker ps -aq)
 ```
 
 
-### Running MONGO Application in Docker [S8]
-
-> here I have a important note, we can run a additional process inside of the run container
-
-command  | Explanation 
-------------- | -------------
-`> docker pull mongo`| download image 
-`> docker help`| see more options that we can run, In this case I'll use exec (<-)
-`> docker pull mongo`| download image 
-`> docker run mongo`| this execute a container with this id **72f80e5cb0b2** 
-`> docker exec [idDocker] or [nameDocker]`| download image, to see idDocker or nameDocker, `docker ps`
-`> docker exec -it 72 bash`| same above, in the terminal I could see that I'm inside docker container that I enter 
-`root@72f80e5cb0b2:/# ps -e`|  list all the processor that are running inside the container, the most important here is to look that we have able to run multiple process inside container
-`> docker exec -it 72 sh`| open new shell, after running this command return to bash shell (above), and execute again and look a new process is running 
-`> docker inspect [idDocker] or [nameDocker]`| download image 
-`root@72f80e5cb0b2:/# ls /use/bin`| here we could find a mongo file that there are executable
-`> docker exec -it 72 mongo` | this tell us that actually connected to mongo DB  process from mongo shell and here we are able to perform some actions, for eg. we are able to find out a version of this mongo database  
-**INSIDE MONGO SHELL**| ** -- **
-`> db.version()` | ***inside mongo shell*
-`> show dbs` | **inside mongo shell**
-`> use animalsDB` | create a new new database
-`> db.animal.insert({"animal": "cat"})` | insert a new collection
-`> db.animal.insert({"animal": "dog"})` | insert a new collection
-`> db.animal.find()` | list all animals
-`> exit` | ...
-`> ` | **IMPORTANT** keep in mind, if we repeat all this steps we'll created a new container and inside there are't the database that I created (animalsDB)
-`> docker ps -a` | se the last containers 
-`> docker start 72` | this start mongo shell
-`> docker exec -it 72 mongo` | this execute a container with this id **72f80e5cb0b2**, and here it's possible to see the previous database called animalsDB
-
 #### Running MONGO container with persistence database
 
 command  | Explanation 
